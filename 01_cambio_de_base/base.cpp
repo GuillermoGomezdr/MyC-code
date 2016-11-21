@@ -12,7 +12,7 @@ int main () {
 	//el %i le indicamos a la tubería que lea un entero. 
 	//el &numero averigua la dirección de la variable numero, y lo coloca allí.
 	
-	//Hacer 
+	//Hacer: 
 	//	Imprimiremos numero % 2
 	//	Numero = numero /2
 	//Mientras numero /2 > 0
