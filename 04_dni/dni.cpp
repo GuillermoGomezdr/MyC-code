@@ -4,13 +4,13 @@
 int main () {
 	int dni;
 	int resto;
-	char letra[] = {"TRWAGMYFPDXBNJZSQVHLCKE"};
+	char letra[] = "TRWAGMYFPDXBNJZSQVHLCKE";
 
-	printf("Introduce tu número de DNI \n");
+	printf("Introduce tu número de DNI (omite todos los ceros iniciales): \n");
 	scanf(" %i", &dni);
 	
 	resto = dni%23;
-	printf("Tu letra es %c \n", letra[resto]);
+	printf("Tu letra es la:  %c \n", letra[resto]);
 		
 	return EXIT_SUCCESS;
 }
