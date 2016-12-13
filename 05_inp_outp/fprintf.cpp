@@ -3,7 +3,7 @@
 
 int main () {
 	FILE *tubo;
-
+ 
 	tubo = fopen("ficheroInexitente.txt", "w");
 
 	printf("hola!\n"); //Imprime en pantalla, aunque no especifiquemos su tubo.

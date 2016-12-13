@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int main () {
-	
+ 	
 	int numero = 12345678;
 	char dni[8];
 
