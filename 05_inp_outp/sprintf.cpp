@@ -10,9 +10,9 @@ int main () {
 	sprintf(dni, "%i", numero);
 	
 	//Ahora haré un bucle para comprobar que al recorrer el array de dni, haya en cada parte el 
-	//código Ascii correspondiente.	
+	//número correspondiente.	
 	for(int i=0; i<7; i++){
-		printf("%i\n", dni[i]);
+		printf("%c\n", dni[i]);
 	}
 
 	return EXIT_SUCCESS;
