@@ -9,12 +9,10 @@ int main () {
 	printf("Introduzca el número de lista:\n");
 	scanf(" %i", &nLista);
 	
-	do{
-		if(nLista >17){
-			nLista -= 17;
-			fila ++;
-		}
-	}while(nLista > 17);
+	while(nLista > 17){
+		nLista -= 17;
+		fila++;
+	}
 	
 	columna = nLista;
 	
