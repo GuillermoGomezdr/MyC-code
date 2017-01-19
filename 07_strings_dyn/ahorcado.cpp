@@ -4,7 +4,6 @@
 #include <time.h>
 
 #define N 0x200
-#define CANTIDAD(x) (sizeof((x))/sizeof(char *)-1)
 
 	const char *palabra[] = {"patata", "amalgama", "narcolepsia",
 	"suricato", "parguela", "shuriken", "panenteismo", "nemesis", 
@@ -12,15 +11,15 @@
 
 int main () {
 
-	char adivinado[N];
+	char adivinado[N], errores[N];
 	const char *elegida;
 	char letra;
-	int aleatorio, fin = 0;
+	int aleatorio, nLetras = 0, cErrores = 0;
 
 	//Primera parte.
 	//Tomamos una palabra al azar del char *palabra[]
 	srand(time(NULL));
-	aleatorio = rand() % CANTIDAD(palabra);		
+	aleatorio = rand() % (sizeof(palabra)/sizeof(char *)-1);		
 	elegida = palabra[aleatorio];
 
 	printf(" %s\n", elegida);
@@ -28,23 +27,35 @@ int main () {
 	//Rellenamos de ceros el adivinado y luego de '_'. Su cantidad igualará 
 	//al nº de caracteres de la palabra seleccionada.
 	bzero(adivinado, N);
-	for(int i=0; i<strlen(elegida); i++)
+	nLetras = strlen(elegida);
+	for(int i=0; i<nLetras; i++)
 		adivinado[i]='_';
 
 	//printf(" %s\n", adivinado);
 	
 
 	//Segunda parte.
-	//Pediremos letras.
-	printf("Introduzca una letra");
-	scanf(" %c", &letra);
 	
-	for(int i=0; i<strlen(elegida); i++){
-		if(letra == elegida[i]){
-			adivinado[i] = letra;
-		}
-	}
+	while(nLetras >	0 && cErrores < 5){
+		printf("Introduzca una letra: ");
+		scanf(" %c", &letra);
 
-	printf(" %s\n", adivinado);
+		int prevnLetras = nLetras;
+		for(int i=0; i<strlen(elegida); i++){
+			if(letra == elegida[i]){
+				adivinado[i] = letra;
+				nLetras --;
+			}
+		}
+
+		if(prevnLetras == nLetras)
+			cErrores++;
+		printf(" %s\n", adivinado);
+		printf(" Número de errores: %i\n Fallos restantes: %i\n", cErrores, 5-cErrores);
+	}
+	if(nLetras == 0)
+		printf("\n ¡Enhorabuena!\n¡Has ganado!\n");
+	else if(cErrores == 5)
+		printf("\n Oooooh... \n Has perdido... \n Intentalo de nuevo.\n");
 	return EXIT_SUCCESS;
 }
