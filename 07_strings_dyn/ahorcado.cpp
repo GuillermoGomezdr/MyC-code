@@ -7,7 +7,11 @@
 
 	const char *palabra[] = {"patata", "amalgama", "narcolepsia",
 	"suricato", "parguela", "shuriken", "panenteismo", "nemesis", 
-	"antitesis", "origen","artropodo", NULL};
+	"antitesis", "origen","artropodo", "cacatua", "distopia", 
+	"catarsis", "sinestesia", "clemencia", "coordialidad", "plebiscito",
+	"concatenar", "sombrio", "cantera", "soliloquio", "reminiscencia",
+	"licantropo", "sintetico", "lucrativo", "niveo", "marcial",
+	"nipon", "adoctrinamiento", "extinto", "impersonal", NULL};
 
 int main () {
 
@@ -17,26 +21,18 @@ int main () {
 	int aleatorio, nLetras = 0, cErrores = 0;
 
 	//Primera parte.
-	//Tomamos una palabra al azar del char *palabra[]
 	srand(time(NULL));
 	aleatorio = rand() % (sizeof(palabra)/sizeof(char *)-1);		
 	elegida = palabra[aleatorio];
 
-	//printf(" %s\n", elegida);
-	
-	//Rellenamos de ceros el adivinado y luego de '_'. Su cantidad igualará 
-	//al nº de caracteres de la palabra seleccionada.
 	bzero(adivinado, N);
 	bzero(errores, N);
 	nLetras = strlen(elegida);
 	for(int i=0; i<nLetras; i++)
 		adivinado[i]='_';
 
-	//printf(" %s\n", adivinado);
-	
-
 	//Segunda parte.
-	
+	printf(" %s\n", adivinado);
 	while(nLetras >	0 && cErrores < 5){
 		printf("Introduzca una letra: ");
 		scanf(" %c", &letra);
