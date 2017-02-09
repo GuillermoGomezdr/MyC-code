@@ -15,10 +15,10 @@
 
 int main () {
 
-	char adivinado[N], letrasDichas[N];
+	char adivinado[N], dichas[N];
 	const char *elegida;
 	char letra;
-	int aleatorio, nLetras = 0, cLetras =0, cErrores = 0;
+	int aleatorio, nLetras = 0,cDichas = 0, cErrores = 0;
 
 	//Primera parte.
 	srand(time(NULL));
@@ -26,7 +26,7 @@ int main () {
 	elegida = palabra[aleatorio];
 
 	bzero(adivinado, N);
-	bzero(letrasDichas, N);
+	bzero(dichas, N);
 	nLetras = strlen(elegida);
 	for(int i=0; i<nLetras; i++)
 		adivinado[i]='_';
@@ -44,19 +44,21 @@ int main () {
 				nLetras --;
 			}
 		}
+		
+		dichas[cDichas++] = letra;
 
-		if(prevnLetras == nLetras)
-			cErrores++;			
+		if(prevnLetras == nLetras){
+			printf("¡Error!\n");
+			cErrores++;	
+		}
 
-		letrasDichas[cLetras++] = letra;
-			
 		printf(" %s\n", adivinado);
 		printf(" Fallos restantes: %i\n", 5-cErrores);
-		printf(" Letras dichas: %s\n", letrasDichas);
+		printf(" Letras dichas: %s\n", dichas);
 	}
 	if(nLetras == 0)
-		printf("\n ¡Enhorabuena!\n¡Has ganado!\n");
+		printf("\n ¡Enhorabuena!\n ¡Has ganado!\n");
 	else if(cErrores == 5)
-		printf("\n Oooooh... \n Has perdido... \n Intentalo de nuevo.\n");
+		printf("\n Oooooh... \n Has perdido...\n La palabra era: %s. \n Intentalo de nuevo.\n", elegida);
 	return EXIT_SUCCESS;
 }
