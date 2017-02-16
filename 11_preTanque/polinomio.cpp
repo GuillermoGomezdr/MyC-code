@@ -2,12 +2,10 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define N 5
-
-double resolver_polinomio(double pol[N], double x){
+double resolver_polinomio(double pol[100], double x){
 	double suma = 0;
 	
-	for(int i = 0; i<N; i++)
+	for(int i = 0; i<100; i++)
 		suma += pol[i]*pow(x,i);
 
 	printf(" %.0lf\n", suma);
@@ -16,15 +14,18 @@ double resolver_polinomio(double pol[N], double x){
 
 int main () {
 
-	double polinomio[N];
-	double x;
-	
-	printf("Introduce el polinomio: ");
-	for(int i = 0; i<N; i++)
-		scanf(" %lf", &polinomio[i]);
+	double polinomio[100];
+	double x=0, contenedor;
+	int indice = 0;
 	
 	printf("Introduce el valor de x: ");
 	scanf(" %lf", &x);
+	
+	printf("Introduce el polinomio: \n");
+	printf("Nota: Para terminar, introduce una letra cualquiera.\n");
+	while(scanf(" %lf", &contenedor)){
+		polinomio[indice++] = contenedor;
+	}	
 
 	resolver_polinomio(polinomio, x);
 
