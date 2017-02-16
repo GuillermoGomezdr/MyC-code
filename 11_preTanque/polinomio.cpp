@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
+ 
 double resolver_polinomio(double pol[100], double x){
 	double suma = 0;
 	
