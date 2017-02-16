@@ -10,7 +10,7 @@ double resolver_polinomio(double pol[100], double x){
 
 	printf(" %.0lf\n", suma);
 	return suma;
-}
+} 
 
 int main () {
 
