@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define DELTA 0.01
+#define DELTA 0.05
 #define g 9.8
 
 int main () {
@@ -12,17 +12,13 @@ int main () {
 	scanf(" %lf", &Vx);
 
 	double Vy = Vx, PosX = 0, PosY = 0;
-	int inicio = 1;	
 
-	for (double t = 0.05; PosY > 0 || inicio == 1; t+= 0.05){
+	for (double t = DELTA; PosY >= 0; t+= DELTA){
 		Vy = Vx -g*t;
-		PosX += Vx;
-		PosY += Vy;
+		PosX += Vx*t;
+		PosY += Vy*t;
 
-		printf("En el segunto %.1lf la posición es (%.2lf,%.2lf)\n", t, PosX, PosY);
-
-		if(inicio == 1)
-			inicio = 0;
+		printf("En el segunto %.2lf la posición es (%.2lf,%.2lf) con velocidad %.2lf m/s.\n", t, PosX, PosY, Vy);
 	}
 
 	return EXIT_SUCCESS;
