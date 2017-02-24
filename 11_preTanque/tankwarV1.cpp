@@ -8,8 +8,8 @@
 
 #define g 9.8
 
-#define centroX 50
-#define centroY 50
+#define centroX 20
+#define centroY 20
 
 #define DELTA 0.1
 
@@ -26,7 +26,9 @@ int main () {
 	struct TCoordenadas a = { 0.0, -g}, 
 			    v = { 5.0, 10.0},
 			    s = { 0.0, 0.0};
-	
+
+
+	initscr();	
 	for(t = 0; s.y >= 0; t+= DELTA){
 		v.y += a.y * DELTA;
 		s.y += v.y * DELTA;
