@@ -79,7 +79,7 @@ bool pop(struct TPila *pila){
 
 }
 
-
+ 
 	//Main en proceso, sin terminar.
 int main () {
 
