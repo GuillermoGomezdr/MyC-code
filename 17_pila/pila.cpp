@@ -88,14 +88,21 @@ int main () {
 	bzero(&objConCoord, sizeof(objConCoord));
 
 	int num;
-	printf("Para añadir un nuevo valor a la pila, pulse 1.\nPara quitar el último valor de la pila, pulse 2.\nPara salir, pulse 3.\n");
+	printf("Para añadir un nuevo valor a la pila, pulse 1.\nPara quitar el último valor de la pila, pulse 2.\n");
+	printf("Para borrar toda la pila, pulse 3.\nPara mostrar toda la pila, pulse 4\nPara salir, pulse 5.\n");
 	while(1){
 		scanf(" %i", &num);
 		if(num == 1)
 			push(&objConCoord, valor_random());
 		else if(num == 2)
 			pop(&objConCoord);
-		else if(num == 3)
+		else if(num == 3){  
+			while(pop(&objConCoord));
+			printf("Borrado.\nPila ahora vacía.\n");
+		}
+		else if(num == 4)					//Esto está en proceso. Continuar.
+			printf("En proceso\n");
+		else if(num ==5)
 			return EXIT_SUCCESS;
 		else
 			printf("El número introducido no está asignado a ninguna acción.\n Introduzca de nuevo el número.\n");
