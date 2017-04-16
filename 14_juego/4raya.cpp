@@ -45,6 +45,15 @@ int comprobarGanador(char cg_ficha, char cg_tablero[N][N]){
 }
 
 
+void imprimirTablero(char tablero[N][N]){
+	for (int i = 0; i < N; i++){
+		for(int o = 0; o < N; o++){
+			printf(" %c|", tablero[i][o]);
+		}
+		printf("\n");
+	}
+}
+
 int main () {
 
 	char tablero[N][N];
@@ -57,13 +66,18 @@ int main () {
 		for(int o = 0; o < N; o++)
 			tablero[i][o] =' ';
 
-
+	system("clear");
+	
 	while(game == 1){		
+		imprimirTablero(tablero);					
 		printf("Elige la columna en la que tirar la ficha:");
 		scanf(" %i", &columna);
 		columna -= 1;
+		
+		system("clear");
+
 		if(columna >= N || tablero[0][columna] != ' '){
-			printf("Te has salido del tablero, introduce de nuevo una columna válida\n");
+			printf("Te has salido del tablero, introduce de nuevo una columna válida.\n");
 		} else if (columna < N){
 			for(int i = 0, recorrerArray = 1; i < N && recorrerArray == 1; i++){
 				if(tablero[i+1][columna] != ' ' && tablero[i][columna] == ' '){
@@ -71,13 +85,7 @@ int main () {
 					recorrerArray = 0;
 				}
 			}
-			for (int i = 0; i < N; i++){
-				for(int o = 0; o < N; o++){
-					printf(" %c|", tablero[i][o]);
-				}
-				printf("\n");
-			}
-		
+	
 		game = comprobarGanador(ficha, tablero);
 	
 		if(ficha == 'x')
