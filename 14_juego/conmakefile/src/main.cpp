@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "4raya.h"
 
@@ -16,7 +17,7 @@ int main () {
 	for (int i = 0; i < N; i++)
 		for(int o = 0; o < N; o++)
 			tablero[i][o] =' ';
-
+	
 	system("clear");
 	
 	while(game == 1){		

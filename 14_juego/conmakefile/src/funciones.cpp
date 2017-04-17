@@ -49,8 +49,9 @@ int comprobarGanador(char cg_ficha, char cg_tablero[N][N]){
 void imprimirTablero(char tablero[N][N]){
 	for (int i = 0; i < N; i++){
 		for(int o = 0; o < N; o++){
-			printf(" %c|", tablero[i][o]);
+			printf(" %c│", tablero[i][o]);
 		}
-		printf("\n");
+		printf("\n──┼──┼──┼──┼──┤\n");
 	}
+	printf("1  2  3  4  5\n");
 }
