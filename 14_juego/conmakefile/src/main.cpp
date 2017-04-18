@@ -22,7 +22,7 @@ int main () {
 	
 	while(game == 1){		
 		imprimirTablero(tablero);					
-		printf("Elige la columna en la que tirar la ficha:");
+		printf("Es el turno del jugador %c.\nElige la columna en la que tirar la ficha:", ficha);
 		scanf(" %i", &columna);
 		columna -= 1;
 		
