@@ -51,7 +51,14 @@ void imprimirTablero(char tablero[N][N]){
 		for(int o = 0; o < N; o++){
 			printf(" %c│", tablero[i][o]);
 		}
-		printf("\n──┼──┼──┼──┼──┤\n");
+		printf("\n");
+		for(int u = 0; u < N; u++){
+		printf("──┼");
+		}
+		printf("\n");
 	}
-	printf("1  2  3  4  5\n");
+	for(int a = 0; a < N; a++){
+		printf("%i  ", a+1);
+	}
+	printf("\n");
 }
