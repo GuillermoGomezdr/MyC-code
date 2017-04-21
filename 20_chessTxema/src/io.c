@@ -25,7 +25,13 @@ error_ocurred ()
 int
 repeat (void)
 {
-  return 1;
+  char answer;
+
+  printf("Otra vez (S/N): ");
+  scanf(" %c %*[^\n]\n", &answer); //Aqui leerá todo, pero solo guardará el primer caracter.
+  if(tiolower(answer) == 's')	
+  	return 1;
+  return 0;
 }
 
 char
