@@ -9,7 +9,7 @@
 
 #define Max_Pila 4
 
-
+ 
 struct TPosic{
 	int posicion;
 	int num;
