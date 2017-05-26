@@ -13,7 +13,7 @@ void prerror(const char * const mssg) {
     fprintf(stderr, mssg);
     exit(1);
 }
-
+ 
 void ver_elemento(double el){
     printf("\x1B[%i;10f", fil++);
     printf("%.2lf", el);
