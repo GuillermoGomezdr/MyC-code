@@ -46,7 +46,7 @@ int main () {
 
 	struct TPila plato1, plato2, plato3;
 
-	plato1={{1, t1},4};
+//	plato1={{1, t1},4};
 
 
 	bzero(&plato1, sizeof(plato1));
