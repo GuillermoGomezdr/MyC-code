@@ -9,14 +9,8 @@
 
 #define Max_Pila 4
 
- 
-struct TPosic{
-	int posicion;
-	int num;
-};
-
 struct TPila{
-	struct TPosic *data[Max_Pila];
+	int tipo[];
 	int cima;
 };
 
@@ -25,7 +19,7 @@ bool pus(struct TPila *pila, struct TPosic *dato){
 		printf("Cima superada.\n");
 		return false;
 	}
-	pila -> data[pila -> cima++] = dato;
+	pila -> tipo[pila -> cima++] = dato;
 	return true;
 }
 
@@ -36,7 +30,7 @@ bool pop(struct TPila *pila){
 	}
 
 	pila -> cima--;
-	free(pila -> data[pila->cima]);
+	free(pila -> tipo[pila->cima]);
 	return true;
 }
 
@@ -45,8 +39,6 @@ int main () {
 	int nfrom, nto;
 
 	struct TPila plato1, plato2, plato3;
-
-//	plato1={{1, t1},4};
 
 
 	bzero(&plato1, sizeof(plato1));
