@@ -10,13 +10,13 @@ struct TPila{
 };
 
 
-bool push(struct TPila *pila, int dato){
+void push(struct TPila *pila, int dato){
 	if(pila -> cima >= Max_Pila){
 		printf("Cima superada.\n");
-		return false;
+		//return false;
 	}
 	pila -> tipo[pila -> cima++] = dato;
-	return true;
+	//return true;
 }
 
 int pop(struct TPila *pila){
@@ -51,6 +51,20 @@ void imprimirPlato(struct TPila *plato){
 			printf("   |   	\n");
 	}
 }
+
+void realizarCambio(struct TPila *platoTo, struct TPila *platoFrom){
+	int piezaCambiante;
+	if((platoTo -> cima == 0) || (platoTo -> tipo[platoTo -> cima -1] > platoFrom -> tipo[platoFrom -> cima -1])){
+		printf("Comienza el intercambio");
+		piezaCambiante = pop(platoFrom);
+		push(platoTo, piezaCambiante);	
+	} else {
+		printf("El plato al que quieres moverte, tiene una pieza más pequeña que la que quieres mover. No puedes realizar la acción.\n");
+	}
+
+}
+
+
 
 int main () {
 	
@@ -101,9 +115,21 @@ int main () {
 		if(comprobarMov){	
 			printf("Elige un plato al que mover:");
 			scanf(" %i", &nto);
-			system("clear");			
-
-
+			system("clear");
+			
+			if(nfrom == nto)
+				printf("Estás intentando mover algo al mismo plato.\n");
+			else{		
+				switch(nto){
+					case 2: 
+						if(nfrom = 1){
+							realizarCambio(&plato2, &plato1);
+						}else if(nfrom = 3){
+							
+						}
+				
+				}			
+			}
 
 			comprobarMov = 0;
 		} else {
