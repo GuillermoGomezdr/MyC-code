@@ -19,24 +19,24 @@ bool push(struct TPila *pila, int dato){
 	return true;
 }
 
-bool pop(struct TPila *pila){
+int pop(struct TPila *pila){
 	if(pila ->cima <= 0){
-		("La cima ya es 0, no puede bajar más.\n");
-		return false;
+		printf("La cima ya es 0, no puede bajar más.\n");
+		return 0;
 	}
 
 	pila -> cima--;
-	//free(pila -> tipo[pila->cima]);
-	return true;
+	
+	
+	return pila -> tipo[pila -> cima];
 }
 
-void imprimirPlato(struct TPila plato){
+void imprimirPlato(struct TPila *plato){
 	for(int i = 3; i>=0; i--){	
-		if(i==3 && plato.cima != 0)
+		if(i==3 && plato -> cima != 0)
 			printf("   |   \n");
-		if(plato.cima >= i && plato.cima != 0){
-			//printf("Patata\n");
-			switch(plato.tipo[i-1]){
+		if(plato -> cima >= i && plato -> cima != 0){
+			switch(plato -> tipo[i-1]){
 			case 1:
 				printf("  █|█  \n");
 			break;
@@ -54,7 +54,7 @@ void imprimirPlato(struct TPila plato){
 
 int main () {
 	
-	int nfrom, nto, comprobarMov;
+	int nfrom, nto, nmov, comprobarMov;
 
 	struct TPila plato1, plato2, plato3;
 
@@ -67,13 +67,13 @@ int main () {
 	plato1.cima = 3;
 	//printf(" %i\n%i\n%i\n", plato1.tipo[2], plato1.tipo[1], plato1.tipo[0]);	
 
+	imprimirPlato(&plato1);
+	printf("▨▨▨▨▨▨\n\n");
+	imprimirPlato(&plato2);
+	printf("▨▨▨▨▨▨\n\n");
+	imprimirPlato(&plato3);
+	printf("▨▨▨▨▨▨\n\n");
 
-	imprimirPlato(plato1);
-	printf("▨▨▨▨▨▨\n\n");
-	imprimirPlato(plato2);
-	printf("▨▨▨▨▨▨\n\n");
-	imprimirPlato(plato3);
-	printf("▨▨▨▨▨▨\n\n");
 
 
 	while(1){
@@ -83,26 +83,43 @@ int main () {
 		switch(nfrom){
 			case 1:
 				if(plato1.cima > 0)
-					comprobarMov++;			
+					comprobarMov++;
+				nmov = plato1.tipo[plato1.cima-1];			
 			break;
 			case 2:
 				if(plato2.cima > 0)
-					comprobarMov++;		
+					comprobarMov++;
+				nmov = plato2.tipo[plato2.cima-1];		
 			break;
 			case 3:
 				if(plato3.cima > 0)
-					comprobarMov++;			
+					comprobarMov++;	
+				nmov = plato3.tipo[plato3.cima-1];		
 			break;
 		}
+
 		if(comprobarMov){	
 			printf("Elige un plato al que mover:");
 			scanf(" %i", &nto);
-			
+			system("clear");			
+
+
 
 			comprobarMov = 0;
+		} else {
+			system("clear");
+			printf("El plato elegido esta vacio. Vuelve a intentarlo.\n");			
 		}
 
-		
+
+	imprimirPlato(&plato1);
+	printf("▨▨▨▨▨▨\n\n");
+	imprimirPlato(&plato2);
+	printf("▨▨▨▨▨▨\n\n");
+	imprimirPlato(&plato3);
+	printf("▨▨▨▨▨▨\n\n");
+
+
 	}
 
 	return EXIT_SUCCESS;
