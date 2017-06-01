@@ -5,7 +5,7 @@
 #define MAX 3
 
 struct TPila{
-	int tipo[];
+	int tipo[MAX];
 	int cima;
 };
 
@@ -27,13 +27,12 @@ int pop(struct TPila *pila){
 	}
 	printf("Paso : %i\n", v);
 
-	--pila -> cima;
-	pila -> tipo[pila -> cima] = 0;
+	pila -> cima--;
 	printf("cima: %i\n", pila -> cima);
 	return v;
 }
 
-/*void imprimirPlato(struct TPila *plato){
+void imprimirPlato(struct TPila *plato){
 	for(int i = 3; i>0; i--){	
 		if(i==3 && plato -> cima != 0)
 			printf("   |   \n");
@@ -53,9 +52,9 @@ int pop(struct TPila *pila){
 		}else
 			printf("   |   	\n");
 	}
-}*/
+}
 
-void imprimirPlato(struct TPila *plato){
+/*void imprimirPlato(struct TPila *plato){
 	for(int i = 3; i > 0; i--){
 		if(plato->cima >= i && plato -> cima != 0){
 			printf("%i\n", plato -> tipo[i-1]);
@@ -63,7 +62,7 @@ void imprimirPlato(struct TPila *plato){
 			printf("0\n");
 		}
 	}
-}
+}*/
 
 void realizarCambio(struct TPila *platoTo, struct TPila *platoFrom){
 	int piezaCambiante;
