@@ -53,11 +53,10 @@ void imprimirPlato(struct TPila *plato){
 void realizarCambio(struct TPila *platoTo, struct TPila *platoFrom){
 	int piezaCambiante;
 	if((platoTo -> cima == 0) || (platoTo -> tipo[platoTo -> cima -1] > platoFrom -> tipo[platoFrom -> cima -1])){
-		printf("Comienza el intercambio\n");
+		printf("¡Intercambio realizado correctamente!\n");
 		piezaCambiante = pop(platoFrom);
 		push(platoTo, piezaCambiante);	
 	} else {
-		printf("cima %i to %i // cima %i from %i\n", platoTo -> cima, platoTo -> tipo[platoTo -> cima-1], platoFrom -> cima, platoFrom ->tipo[platoFrom -> cima-1]);
 		printf("El plato al que quieres moverte, tiene una pieza más pequeña que la que quieres mover. No puedes realizar la acción.\n");
 	}
 
