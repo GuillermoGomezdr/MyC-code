@@ -9,7 +9,6 @@ struct TPila{
 	int cima;
 };
 
-
 void push(struct TPila *pila, int dato){
 	if(pila -> cima >= MAX){
 		printf("Cima superada.\n");
@@ -25,10 +24,8 @@ int pop(struct TPila *pila){
 		printf("La cima ya es 0, no puede bajar más.\n");
 		return 0;
 	}
-	printf("Paso : %i\n", v);
-
+	pila -> tipo[pila -> cima-1] = 0;
 	pila -> cima--;
-	printf("cima: %i\n", pila -> cima);
 	return v;
 }
 
@@ -37,7 +34,6 @@ void imprimirPlato(struct TPila *plato){
 		if(i==3 && plato -> cima != 0)
 			printf("   |   \n");
 		if(plato -> cima >= i && plato -> cima != 0){
-			//printf("%i\n", plato->tipo[i-1]);
 			switch(plato -> tipo[i-1]){
 			case 1:
 				printf("  █|█  \n");
@@ -53,16 +49,6 @@ void imprimirPlato(struct TPila *plato){
 			printf("   |   	\n");
 	}
 }
-
-/*void imprimirPlato(struct TPila *plato){
-	for(int i = 3; i > 0; i--){
-		if(plato->cima >= i && plato -> cima != 0){
-			printf("%i\n", plato -> tipo[i-1]);
-		} else {
-			printf("0\n");
-		}
-	}
-}*/
 
 void realizarCambio(struct TPila *platoTo, struct TPila *platoFrom){
 	int piezaCambiante;
@@ -82,17 +68,19 @@ void realizarCambio(struct TPila *platoTo, struct TPila *platoFrom){
 int main () {
 	
 	int nfrom, nto, nmov, comprobarMov;
-
+	int contador = 0;
 	struct TPila plato1, plato2, plato3;
 
 	plato2.cima = 0;
 	plato3.cima = 0;
 
 	plato1.tipo[MAX];
-	for(int i=0; i<MAX; i++)
-	plato1.tipo[i] = MAX-i;
-	plato1.cima = 3;
-	//printf(" %i\n%i\n%i\n", plato1.tipo[2], plato1.tipo[1], plato1.tipo[0]);	
+	for(int i=0; i<MAX; i++){
+		plato1.tipo[i] = MAX-i;
+		plato2.tipo[i] = 0;
+		plato3.tipo[i] = 0;
+	}
+	plato1.cima = 3;	
 	
 	imprimirPlato(&plato1);
 	printf("▨▨▨▨▨▨\n\n");
@@ -135,44 +123,55 @@ int main () {
 			else{		
 				switch(nto){
 					case 1:
-						if(nfrom = 2){
+						if(nfrom == 2){
 							realizarCambio(&plato1, &plato2);
-						}else if(nfrom =3){
+						}else if(nfrom == 3){
 							realizarCambio(&plato1, &plato3);
-						
 						}
+					break;
 					case 2: 
-						if(nfrom = 1){
+						if(nfrom == 1){
 							realizarCambio(&plato2, &plato1);
-						}else if(nfrom = 3){
-							realizarCambio(&plato2, &plato1);
+						}else if(nfrom == 3){
+							realizarCambio(&plato2, &plato3);
 						}
 					break;
 					case 3:
-						if(nfrom = 1){
+						if(nfrom == 1){
 							realizarCambio(&plato3, &plato1);
-						} else if (nfrom = 2){
+						} else if (nfrom == 2){
 							realizarCambio(&plato3, &plato2);
 						}
-				
+					break;
 				}			
 			}
-
+			/*printf("Plato 1: %i, %i, %i\n", plato1.tipo[0], plato1.tipo[1], plato1.tipo[2]);
+			printf("Plato 2: %i, %i, %i\n", plato2.tipo[0], plato2.tipo[1], plato2.tipo[2]);	
+			printf("Plato 3: %i, %i, %i\n", plato3.tipo[0], plato3.tipo[1], plato3.tipo[2]);				
+			printf("Cimas: 1-%i , 2-%i, 3-%i\n", plato1.cima, plato2.cima, plato3.cima);*/
 			comprobarMov = 0;
+			printf("Número de movimientos realizados: %i.\n", ++contador);
 		} else {
 			system("clear");
 			printf("El plato elegido esta vacio. Vuelve a intentarlo.\n");			
 		}
 
 
-	imprimirPlato(&plato1);
-	printf("▨▨▨▨▨▨\n\n");
-	imprimirPlato(&plato2);
-	printf("▨▨▨▨▨▨\n\n");
-	imprimirPlato(&plato3);
-	printf("▨▨▨▨▨▨\n\n");
+		imprimirPlato(&plato1);
+		printf("▨▨▨▨▨▨\n\n");
+		imprimirPlato(&plato2);
+		printf("▨▨▨▨▨▨\n\n");
+		imprimirPlato(&plato3);
+		printf("▨▨▨▨▨▨\n\n");
 
-
+		if(plato3.cima == 3){
+			printf("¡Enhorabuena, has superado la Torre de Hanoi!\n");
+			if(contador == 7)
+				printf("... Y además en el número mínimo de movimientos. ¡Congrats!\n");
+			else 
+				printf("¿Sabías que la torre de Hanoi se puede hacer en solo 7 movimientos?\n¿Eres capaz de hacerlo?\n");
+			return EXIT_SUCCESS;
+		}
 	}
 
 	return EXIT_SUCCESS;
