@@ -13,14 +13,10 @@ int main () {
 	printf("Elige un número para comprobar si es primo: ");
 	scanf(" %i", &num);
 
-	switch(es_primo(num, num-1)){
-		case true:
-			printf("Es primo.\n");
-		break;
-		case false:
-			printf("No es primo.\n");
-		break;
-	}	
+	if(es_primo(num, num-1))
+		printf("Es primo.\n");
+	else 
+		printf("No es primo.\n");	
 
 	return EXIT_SUCCESS;
 }
