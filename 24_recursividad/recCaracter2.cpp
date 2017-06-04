@@ -15,7 +15,7 @@ int main () {
 	const char *palabra ="Patata";
 	
 	imprimirLetras(palabra);
-	printf("\n");
+	printf(" \n");
 
 	return EXIT_SUCCESS;
 }
