@@ -13,6 +13,9 @@ línea si la cadena de formato empieza por un espacio, de manera que, no podría
 sólo un intro. (3 puntos)
 */
 
+
+// En proceso.
+
 struct TPila{
 	int num[MAX];
 	int cima;
