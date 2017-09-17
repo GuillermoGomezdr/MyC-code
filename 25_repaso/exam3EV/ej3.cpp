@@ -38,6 +38,22 @@ void crearNave (struct Nave* naveCreada){
 	naveCreada = *n;
 }
 
+struct Nave mover_nave(struct Nave naveMov){
+	naveMov.x++;
+	naveMov.y++;
+	return naveMov;
+}
+
+void pintar_naves(struct Nave navePintar){
+	for(int i= 0; i< navePintar.y; i++){
+		printf("\n");
+	}
+	for(int i = 0; i< navePintar.x; i++){
+		printf(" ");
+	}
+	printf("%c\n", navePintar.avatar;
+}
+
 int main () {
 	
 	return EXIT_SUCCESS;
