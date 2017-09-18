@@ -25,7 +25,8 @@ struct TCoord *valor_random(){
 
 bool push(struct TPila *pila, struct TCoord *dato){
 	if(pila -> cima >= Max_Pila){
-		printf("La pila ha alcanzado su tope. Vacía alguna posición antes de volver a intentar añadir más.\n");
+	//	printf("La pila ha alcanzado su tope. Vacía alguna posición antes de volver a intentar añadir más.\n");
+		printf("Tope alcanzado.\n");
 		return false;
 	}
 	pila -> data[pila->cima++] = dato;
