@@ -8,7 +8,7 @@ const char* program_name;
 void print_usage(FILE* stream, int exit_code){
 	fprintf(stream, "*Usage: %s options [ inputfile ...]\n", program_name);
 	fprintf(stream,
-		"-h	--help			Display this usage information.\n",
+		"-h	--help			Display this usage information.\n"
 		"-o 	--output filename	Write output to file.\n"
 		"-v	--verbose		Print verbose messages.\n");
 	exit(exit_code);
@@ -38,6 +38,7 @@ int main (int argc, char* argv[]) {
 				//break;
 			case 'o':
 				output_filename = optarg;
+				printf("OF: %s\n", output_filename);
 				break;
 			case 'v':
 				verbose = 1;
@@ -49,8 +50,7 @@ int main (int argc, char* argv[]) {
 			default:
 				abort();
 		}
-	}
-	
+	}	
 	while(next_option != -1);
 
 	if(verbose)
