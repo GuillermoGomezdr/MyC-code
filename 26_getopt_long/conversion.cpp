@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <math.h>
+
 #include <getopt.h> //Librería que nos permitirá usar getopt_long
 #define DEBUG(...) if (verbose) \
 	fprintf(stderr, __VA_ARGS__);
@@ -15,14 +17,21 @@ void print_usage(FILE* stream, int exit_code){
 	exit(exit_code);
 }
 
+int convertTo(int base, int num, int elevadoA){
+	if(num/base < 1)
+		return num%base*pow(10, elevadoA++) + num/base*pow(10, elevadoA);
+	return num%base*pow(10,elevadoA++) + convertTo(base, num/base, elevadoA);
+}
+
 int main (int argc, char* const argv[]) {
 	int next_option;
 	int output_base;
+	int numConvertido = 0;
 
 	const char* const short_options = "hb:v";
 	const struct option long_options[] ={
 		{"help",	0,	NULL,	'h'},
-		{"base",	1,	NULL,	'o'},
+		{"base",	1,	NULL,	'b'},
 		{"verbose",	0,	NULL,	'v'}
 	};
 	
@@ -37,6 +46,11 @@ int main (int argc, char* const argv[]) {
 			case 'b':
 				output_base = atoi(optarg);
 				DEBUG("Estableciendo la base de salida a %i\n", output_base);
+				
+				numConvertido = convertTo(output_base, atoi(argv[argc-1]), 0);	
+				printf("El número %i, pasa a base %i, y da %i.\n",
+					atoi(argv[argc-1]), output_base, numConvertido);
+				
 				break;
 			case 'v':
 				verbose = 1;
