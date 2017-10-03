@@ -69,7 +69,6 @@ int main (int argc, char* const argv[]) {
 				break;
 			case 'I':
 				input_base = atoi(optarg);		
-				printf("La I es %i\n", input_base);
 				numConvertido = convertFrom(input_base, atoi(argv[argc-1]),-1);
 				printf("El número %i, de base %i, pasado a base 10 es %i.\n", 
 					NUM, input_base, numConvertido);
@@ -78,9 +77,15 @@ int main (int argc, char* const argv[]) {
 				output_base = atoi(optarg);
 				DEBUG("Estableciendo la base de salida a %i\n", output_base);
 				
-				numConvertido = convertTo(output_base, NUM, 0);	
-				printf("El número %i, pasa a base %i, y da %i.\n",
-					NUM, output_base, numConvertido);
+				if(numConvertido == 0){	
+					numConvertido = convertTo(output_base, NUM, 0);	
+					printf("El número %i, pasado a base %i es %i.\n",
+						NUM, output_base, numConvertido);
+				}else{
+					printf("El número %i, ", numConvertido);
+					numConvertido = convertTo(output_base, numConvertido, 0);
+					printf("pasado a base %i es %i.\n", output_base, numConvertido);
+				}
 				
 				break;
 			case 'v':
