@@ -34,7 +34,7 @@ int convertFrom(int base, int num, int elevadoA){
 	elevadoA --;
 
 	//PARTE 2:
-	//	
+	//	Vamos transformando el número a la base 10	
 	int numSacado = num / pow(10, elevadoA);
 
 	if(num < 10)
@@ -51,7 +51,7 @@ int main (int argc, char* const argv[]) {
 	int input_base;
 	int numConvertido = 0;
 
-	const char* const short_options = "hI:b:v";
+	const char* short_options = "hI:b:v";
 	const struct option long_options[] ={
 		{"help",	0,	NULL,	'h'},
 		{"ibase",	1,	NULL,	'I'},
