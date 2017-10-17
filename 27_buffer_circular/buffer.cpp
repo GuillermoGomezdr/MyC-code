@@ -24,14 +24,14 @@ bool pop(struct TQueue *b){
 		printf("Pila vacía.");
 	}
 
-	b -> buffer[b -> head] = /*NO SE QUE NARICES PONER AQUI, ¡AGH!*/;
+	//b -> buffer[b -> head] =;
 	b -> head++;
 	if(b -> head == N)
 		b -> head = 0;
 }
 
 void mostrar(struct TQueue b){
-	for(int i = 0; i < N; i++)
+	for(int i = b -> head; i != b->summit; i++)
 		printf("%i //", b.buffer[i]);
 	printf("\n");
 }
@@ -41,11 +41,12 @@ int main () {
 	struct TQueue pila;
 	bzero(&pila, sizeof(pila));
 
-	int num;
+	int num = 0;
 	char letra;
 
 	printf("Para añadir un nuevo valor a la pila, pulse 1.\nPara quitar el valor más antiguo de la pila, pulse 2.\nPara mostrar la pila, pulse 3.\nPara salir, pulse 4.\n");
 	while(1){
+		scanf("%i", &num);
 		if(num == 1){
 			printf("Introduzca una letra: \n");
 			scanf("%c", &letra);
