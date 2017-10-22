@@ -8,7 +8,7 @@ struct TBuffer{
 	int data[N];
 	int head;
 	int summit;
-}
+};
 
 void push(struct TBuffer *b, int d){
 	if(LONGITUD(b) >=N)
@@ -22,6 +22,12 @@ int shift (struct TBuffer *b){ //Esto vendría siendo el pop
 	int d = b -> data[(b -> head)%N];
 	b -> head++;
 	return d;
+}
+
+void peep(struct TBuffer b){
+	for(int i = b.head; i < b.summit; i++)
+		printf("%3i",b.data[i]);
+	printf("/n");
 }
 
 int main () {
