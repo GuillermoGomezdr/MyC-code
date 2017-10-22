@@ -39,7 +39,7 @@ int main () {
 	push(&buffer,d);
 	d = shift(&buffer);
 
-	//peep(buffer);
+	peep(buffer);
 
 	return EXIT_SUCCESS;
 }
