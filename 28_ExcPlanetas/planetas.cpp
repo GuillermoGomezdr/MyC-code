@@ -5,15 +5,16 @@
 #define MAX_P 10 	//Máximo de planetas.
 
 
-int comprobarTiempo (int origen, int destino, int destinoFinal, int tm, int tct[MAX_P][MAX_P]){
+int comprobarTiempo (int origen, int destinoFinal, int tm, int tct[MAX_P][MAX_P]){
 	int tp = 0; 			//Tiempo prueba.
 
 	for(int i = 0; i < MAX_P; i++){
-		if(tct[origen][destino] != 0 && tm > tp){
-			if(destino == destinoFinal)
-				return tp + tct[origen][destino];
+		if(tct[origen][i] != 0 && tm > tp){
+			if(i == destinoFinal)
+				return tp + tct[origen][i];
 			else
-				tp += comprobarTiempo(destino, 0, destinoFinal, tm, tct);
+				tp += comprobarTiempo(i, destinoFinal, tm, tct);
+			//return tp;
 		}
 	}
 }
@@ -69,7 +70,7 @@ int main () {
 		return EXIT_SUCCESS;
 	}
 
-	tm = comprobarTiempo(origenInicial, destinoFinal, destinoFinal, tm, tct);
+	tm = comprobarTiempo(origenInicial, destinoFinal, tm, tct);
 	printf("El tiempo mínimo para viajar del planeta %i al %i es de %i horas.\n", origenInicial, destinoFinal, tm);	
 
 	return EXIT_SUCCESS;
