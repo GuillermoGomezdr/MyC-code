@@ -5,8 +5,8 @@
 #define MAX_P 5 	//Máximo de planetas.
 
 
-int comprobarTiempo (int origen, int destinoFinal, int tm, int tct[MAX_P][MAX_P], int pv[MAX_P], int numP){
-	int tp = 0; 			//Tiempo prueba.
+int comprobarTiempo (int origen, int destinoFinal, int tm, int tp, int tct[MAX_P][MAX_P], int pv[MAX_P], int numP){
+	//int tp = 0; 			//Tiempo prueba.
 	int pr = 0;			//Planeta recorrido. Actúa como booleano para no pasar por los mismos planetas varias veces.
 
 	pv[numP] = origen;
@@ -20,15 +20,19 @@ int comprobarTiempo (int origen, int destinoFinal, int tm, int tct[MAX_P][MAX_P]
 			}
 		}
 		if(pr == 0 && tct[origen][i] != 0 && tm > tp){
-			if(i == destinoFinal)
-				return tp + tct[origen][i];
-			else{
-				//Aqui va la recursividad. Lo difícil.	
+			if(i == destinoFinal){
+				tp =+ tct[origen][i];
+				if(tp < tm)
+					tm = tp;
+			}else{
+				//Aqui va la recursividad. Lo difícil.
+					
 			}
 		} else {printf("No vale.\n");}
 		pr = 0;
 		//return tp;
 	}
+	printf("El tiempo mínimo para viajar del planeta %i al %i es de %i horas.\n", pv[0], destinoFinal, tm);	
 }
 
 
@@ -57,8 +61,6 @@ int main () {
 		return EXIT_SUCCESS;
 	}
 
-	tm = comprobarTiempo(origenInicial, destinoFinal, tm, tct, pv, 0);
-	printf("El tiempo mínimo para viajar del planeta %i al %i es de %i horas.\n", origenInicial, destinoFinal, tm);	
-
+	comprobarTiempo(origenInicial, destinoFinal, tm, 0, tct, pv, 0);
 	return EXIT_SUCCESS;
 }
