@@ -6,7 +6,6 @@
 
 
 struct TPlanet{
-	int tof;			// ¿Estado temporal (0) o final (1)?
 	int trayectos[MAX_P];		// Planetas a los que se puede desplazar.
 	int tiempos[MAX_P];		// Tiempos que tarda en viajar a cada planeta.
 	int vFinal;
@@ -14,13 +13,21 @@ struct TPlanet{
 };
 
 
+int tiempoHaciaOrigen(int tray[], int origen){
+	for(int i = 0; i < MAX_P; i++){
+		if(tray[i] == origen)
+			return i;
+	}
+
+	return MAX_P-1;
+}
+
 int main () {
 	
 	struct TPlanet pA, pB, pC, pD, pE;	
 	struct TPlanet p[MAX_P] = {pA, pB, pC, pD, pE};
 	
 	for(int i = 0; i < MAX_P; i++){
-		p[i].tof = 0;
 		for(int j = 0; j < MAX_P; j++){
 			p[i].trayectos[j] = -1;
 			p[i].tiempos[j] = -1;
@@ -98,7 +105,6 @@ int main () {
 	origen = origenInicial;
 	p[origen].vTemporal = 0;
 	p[origen].vFinal = 0;
-	p[origen].tof = 1;
 	for(int i = 0; i < MAX_P; i++){
 		for(int j = 0; j < MAX_P; j++){
 			if (p[p[origen].trayectos[j]].vFinal < 0 && (tAcumulado + p[origen].tiempos[j]) < p[p[origen].trayectos[j]].vTemporal){
@@ -137,7 +143,21 @@ int main () {
 	//Resultado de averiguar Tiempos:
 	printf("El tiempo mínimo para viajar desde %i hasta %i es de: %i h.\n", origenInicial, destinoFinal, p[destinoFinal].vFinal);
 	//Averiguamos el recorrido.	
+	tAcumulado = p[destinoFinal].vFinal;			//Igualamos a valor Final (tiempo).
+	origen = destinoFinal;
 
+		
+	
+	while(tAcumulado > 0){
+		for(int i = 0; i < MAX_P; i++){
+			if(tAcumulado - p[p[origen].trayectos[i]].tiempos[tiempoHaciaOrigen(p[p[origen].trayectos[i]].trayectos, origen)] == p[p[origen].trayectos[i]].vFinal){
+				printf("Pasa por el planeta %i.", p[origen].trayectos[i]);
+				tAcumulado = p[p[origen].trayectos[i]].vFinal;
+				origen = p[origen].trayectos[i];
+			}		
+		}
+	}
+	
 
 	return EXIT_SUCCESS;
 }
