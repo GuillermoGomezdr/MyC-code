@@ -21,8 +21,10 @@ int main () {
 	
 	for(int i = 0; i < MAX_P; i++){
 		p[i].tof = 0;
-		bzero(&p[i].trayectos, sizeof(p[i].trayectos));
-		bzero(&p[i].tiempos, sizeof(p[i].tiempos));
+		for(int j = 0; j < MAX_P; j++){
+			p[i].trayectos[j] = -1;
+			p[i].tiempos[j] = -1;
+		}
 		p[i].vFinal = -1;
 		p[i].vTemporal = 100;
 	};
@@ -50,9 +52,9 @@ int main () {
 	p[2].trayectos[1] = 3;
 	p[2].trayectos[2] = 4;
 
-	p[2].tiempos[1] = 4;
-	p[2].tiempos[2] = 1;
-	p[2].tiempos[3] = 10;
+	p[2].tiempos[0] = 4;
+	p[2].tiempos[1] = 1;
+	p[2].tiempos[2] = 10;
 
 	//pD
 	p[3].trayectos[0] = 0;
@@ -61,7 +63,7 @@ int main () {
 
 	p[3].tiempos[0] = 5;
 	p[3].tiempos[1] = 1;
-	p[3].tiempos[1] = 8;
+	p[3].tiempos[2] = 8;
 
 	//pE
 	p[4].trayectos[0] = 0;
@@ -92,6 +94,7 @@ int main () {
 		return EXIT_SUCCESS;
 	}
 
+	// Averiguamos los tiempos.
 	origen = origenInicial;
 	p[origen].vTemporal = 0;
 	p[origen].vFinal = 0;
@@ -100,8 +103,7 @@ int main () {
 		for(int j = 0; j < MAX_P; j++){
 			if (p[p[origen].trayectos[j]].vFinal < 0 && (tAcumulado + p[origen].tiempos[j]) < p[p[origen].trayectos[j]].vTemporal){
 				p[p[origen].trayectos[j]].vTemporal = tAcumulado + p[origen].tiempos[j];
-				
-				printf("Entra.\n");
+				//printf("Entra en %i.\n", p[origen].trayectos[j]);
 			}
 		}
 		int vTemporalMenor = -1;
@@ -112,18 +114,29 @@ int main () {
 				vTemporalMenor = j;
 		}
 		p[vTemporalMenor].vFinal = p[vTemporalMenor].vTemporal;
-		tAcumulado += p[vTemporalMenor].vFinal;
+		tAcumulado = p[vTemporalMenor].vFinal;
 		origen = vTemporalMenor;
-
-		printf("El vTemporal de 2 en el paso %i es de: %i.\n", i, p[2].vTemporal);
+		
+		/*
+		for(int j = 0; j < MAX_P; j++){
+			printf("vTemporal de %i en paso %i es de: %i.\n", j, i, p[j].vTemporal);
+		
+		}
+		printf("\n\n");*/
 	}
 
 
-		
+			
 	for(int i = 0; i < MAX_P; i++){
 		printf("La vFinal de %i es: %i.\n", i, p[i].vFinal);
-		printf("La vTemporal de %i es: %i.\n", i, p[i].vTemporal);
+		//printf("La vTemporal de %i es: %i.\n", i, p[i].vTemporal);
 	}
+	printf("\n\n");
+
+	
+	//Resultado de averiguar Tiempos:
+	printf("El tiempo mínimo para viajar desde %i hasta %i es de: %i h.\n", origenInicial, destinoFinal, p[destinoFinal].vFinal);
+	//Averiguamos el recorrido.	
 
 
 	return EXIT_SUCCESS;
