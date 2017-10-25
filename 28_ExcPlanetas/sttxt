@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <strings.h>
 
-#define MAX_P 9 	//Máximo de planetas.
+#define MAX_P 9 	//MÃ¡ximo de planetas.
 
 
 struct TPlanet{
@@ -178,7 +178,7 @@ int main () {
 
 	
 	//Resultado de averiguar Tiempos:
-	printf("El tiempo mínimo para viajar desde %i hasta %i es de: %i h.\n", origenInicial, destinoFinal, p[destinoFinal].vFinal);
+	printf("El tiempo mÃ­nimo para viajar desde %i hasta %i es de: %i h.\n", origenInicial, destinoFinal, p[destinoFinal].vFinal);
 	//Averiguamos el recorrido.	
 	tAcumulado = p[destinoFinal].vFinal;			//Igualamos a valor Final (tiempo).
 	origen = destinoFinal;
