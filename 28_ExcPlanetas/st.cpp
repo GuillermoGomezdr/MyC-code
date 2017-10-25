@@ -13,20 +13,7 @@ struct TPlanet{
 };
 
 
-int tiempoHaciaOrigen(int tray[], int origen){
-	for(int i = 0; i < MAX_P; i++){
-		if(tray[i] == origen)
-			return i;
-	}
-
-	return MAX_P-1;
-}
-
-int main () {
-	
-	struct TPlanet pA, pB, pC, pD, pE;	
-	struct TPlanet p[MAX_P] = {pA, pB, pC, pD, pE};
-	
+void mapaPlanetas(struct TPlanet *p){
 	for(int i = 0; i < MAX_P; i++){
 		for(int j = 0; j < MAX_P; j++){
 			p[i].trayectos[j] = -1;
@@ -122,10 +109,46 @@ int main () {
 	p[9].tiempos[0] = 4;
 	p[9].tiempos[1] = 4;	
 
+}
+
+
+int comprobarDatosIntroducidos(int o, int d){
+	if ((o < 0 || o >= MAX_P) || (d < 0 || d >= MAX_P)){
+		printf("Ha introducido algún dato incorrecto. No se puede calcular la ruta.\n");
+		return 1;
+	}
+	if(o == d){
+		printf("El Origen y el destino son el mismo, por lo que el tiempo que tarda en llegar hasta el es de 0 horas, y solo pasa por el planeta %i.\n", o);
+		return 1;
+	}
+	return 0;
+}
+
+
+int tiempoHaciaOrigen(int tray[], int origen){
+	for(int i = 0; i < MAX_P; i++){
+		if(tray[i] == origen)
+			return i;
+	}
+
+	return MAX_P-1;
+}
+
+
+
+
+int main () {
+	
+	struct TPlanet pA, pB, pC, pD, pE;	
+	struct TPlanet p[MAX_P] = {pA, pB, pC, pD, pE};
+	mapaPlanetas(p);	
+
 	//Programa
-	int origenInicial, destinoFinal;
-	int origen, destino;
+	int origenInicial, destinoFinal;	
+	int origen, destino;			// Variables que usaremos para "recorrer el mapa". Su valor irá variando según comprobemos las diferentes rutas.
 	int tAcumulado = 0;			// Tiempo Acumulado en trayecto.
+
+
 
 	printf("Elige el planeta de Origen:\n");
 	scanf("%i", &origenInicial);
@@ -133,10 +156,11 @@ int main () {
 	printf("Elige el planeta de Destino:\n");
 	scanf("%i", &destinoFinal);
 
-	if(origenInicial == destinoFinal){
-		printf("El Origen y el destino son el mismo, por lo que el tiempo que tarda en llegar hasta el es de 0 horas, y solo pasa por el planeta %i.\n", origenInicial);
+	if(comprobarDatosIntroducidos(origenInicial, destinoFinal))
 		return EXIT_SUCCESS;
-	}
+	
+	
+	
 
 	// Averiguamos los tiempos.
 	origen = origenInicial;
@@ -146,7 +170,6 @@ int main () {
 		for(int j = 0; j < MAX_P; j++){
 			if (p[p[origen].trayectos[j]].vFinal < 0 && (tAcumulado + p[origen].tiempos[j]) < p[p[origen].trayectos[j]].vTemporal){
 				p[p[origen].trayectos[j]].vTemporal = tAcumulado + p[origen].tiempos[j];
-				//printf("Entra en %i.\n", p[origen].trayectos[j]);
 			}
 		}
 		int vTemporalMenor = -1;
@@ -159,26 +182,11 @@ int main () {
 		p[vTemporalMenor].vFinal = p[vTemporalMenor].vTemporal;
 		tAcumulado = p[vTemporalMenor].vFinal;
 		origen = vTemporalMenor;
-		
-		/*
-		for(int j = 0; j < MAX_P; j++){
-			printf("vTemporal de %i en paso %i es de: %i.\n", j, i, p[j].vTemporal);
-		
-		}
-		printf("\n\n");*/
 	}
-
-
-			
-	for(int i = 0; i < MAX_P; i++){
-		printf("La vFinal de %i es: %i.\n", i, p[i].vFinal);
-		//printf("La vTemporal de %i es: %i.\n", i, p[i].vTemporal);
-	}
-	printf("\n\n");
 
 	
 	//Resultado de averiguar Tiempos:
-	printf("El tiempo mínimo para viajar desde %i hasta %i es de: %i h.\n", origenInicial, destinoFinal, p[destinoFinal].vFinal);
+	printf("\nEl tiempo mínimo para viajar desde %i hasta %i es de: %i h.\n", origenInicial, destinoFinal, p[destinoFinal].vFinal);
 
 	//Averiguamos el recorrido.	
 	tAcumulado = p[destinoFinal].vFinal;			//Igualamos a valor Final (tiempo).
