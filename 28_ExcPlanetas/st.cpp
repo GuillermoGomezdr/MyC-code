@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <strings.h>
 
-#define MAX_P 9 	//Máximo de planetas.
+#define MAX_P 10	//Máximo de planetas.
 
 
 struct TPlanet{
@@ -179,18 +179,27 @@ int main () {
 	
 	//Resultado de averiguar Tiempos:
 	printf("El tiempo mínimo para viajar desde %i hasta %i es de: %i h.\n", origenInicial, destinoFinal, p[destinoFinal].vFinal);
+
 	//Averiguamos el recorrido.	
 	tAcumulado = p[destinoFinal].vFinal;			//Igualamos a valor Final (tiempo).
-	origen = destinoFinal;
+	origen = destinoFinal;					//Ahora haremos el recorrido a la inversa para averiguar los planetas por los que pasamos, así que igualamos el origen al destino final.
 
-		
-	
+
+	printf("Antes de llegar al planeta %i...\n", destinoFinal);	
 	while(tAcumulado > 0){
+		int seguirBuscando = 1;
 		for(int i = 0; i < MAX_P; i++){
-			if(tAcumulado - p[p[origen].trayectos[i]].tiempos[tiempoHaciaOrigen(p[p[origen].trayectos[i]].trayectos, origen)] == p[p[origen].trayectos[i]].vFinal){
-				printf("Pasa por el planeta %i.", p[origen].trayectos[i]);
+			if(tAcumulado - p[p[origen].trayectos[i]].tiempos[tiempoHaciaOrigen(p[p[origen].trayectos[i]].trayectos, origen)] == p[p[origen].trayectos[i]].vFinal
+			   && seguirBuscando == 1){
 				tAcumulado = p[p[origen].trayectos[i]].vFinal;
 				origen = p[origen].trayectos[i];
+
+				if(origen == origenInicial)
+					printf("... Sale del planeta %i.\n", origen);
+				else
+					printf("... Pasa por el planeta %i..\n", origen);
+
+				seguirBuscando = 0;
 			}		
 		}
 	}
