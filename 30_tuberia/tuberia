@@ -1,0 +1,10 @@
+#!/bin/bash
+# Crear una tubería anónima
+
+echo "hola" > tuberia.txt
+exec 4< tuberia.txt
+unlink tuberia.txt
+
+sleep 7
+exec 4<&-
+echo $i
